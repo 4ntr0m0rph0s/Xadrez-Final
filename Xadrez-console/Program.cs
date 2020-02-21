@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tabuleiro;
+using tabuleiro;
+using xadrez;
 
 namespace Xadrez_console
 {
@@ -11,12 +8,42 @@ namespace Xadrez_console
     {
         static void Main(string[] args)
         {
-            Posicao P;
+            try
+            {
+                PartidaDeXadrez partida = new PartidaDeXadrez();
 
-            P = new Posicao(3, 4);
+                while(!partida.terminada)
+                {
 
-            Console.WriteLine("Posicao: " + P);
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(partida.tab);
+
+                    Console.WriteLine("Origem: ");
+                    Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+                        
+
+                   
+
+                    Console.WriteLine("Destino: ");
+                    Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
+
+                    partida.executaMovimento(origem, destino);
+
+
+                }
+
+
+                
+            }
+
+            catch (TabuleiroException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
             Console.ReadLine();
         }
     }
 }
+
+
